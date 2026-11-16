@@ -22,6 +22,8 @@ const detailImage = document.querySelector('#detail-image');
 const materialQuote = document.querySelector('#material-quote');
 const form = document.querySelector('#quote-form');
 const fields = form.elements;
+const lengthField = fields.namedItem('length');
+const widthField = fields.namedItem('width');
 const materialSelect = document.querySelector('#material-select');
 const surface = document.querySelector('#surface');
 const preview = document.querySelector('#message-preview');
@@ -103,15 +105,15 @@ function readDimension(input) {
 }
 
 function checkMeasurements() {
-  const length = readDimension(fields.length);
-  const width = readDimension(fields.width);
-  fields.length.setCustomValidity('');
-  fields.width.setCustomValidity('');
+  const length = readDimension(lengthField);
+  const width = readDimension(widthField);
+  lengthField.setCustomValidity('');
+  widthField.setCustomValidity('');
   const invalid = 'Ingresá una medida mayor que cero en centímetros.';
-  if (Number.isNaN(length)) fields.length.setCustomValidity(invalid);
-  if (Number.isNaN(width)) fields.width.setCustomValidity(invalid);
-  if (length !== null && width === null) fields.width.setCustomValidity('Ingresá el ancho o borrá el largo.');
-  if (width !== null && length === null) fields.length.setCustomValidity('Ingresá el largo o borrá el ancho.');
+  if (Number.isNaN(length)) lengthField.setCustomValidity(invalid);
+  if (Number.isNaN(width)) widthField.setCustomValidity(invalid);
+  if (length !== null && width === null) widthField.setCustomValidity('Ingresá el ancho o borrá el largo.');
+  if (width !== null && length === null) lengthField.setCustomValidity('Ingresá el largo o borrá el ancho.');
   const area = length && width ? length * width / 10000 : null;
   return { length, width, area };
 }
